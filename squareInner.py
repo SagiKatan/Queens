@@ -3,12 +3,22 @@ from helpers import screen
 from square import Square
 
 
-class SquareInner(Square):
-    def __init__(self, x, y):
+class InnerSquare(Square):
+    def __init__(self, x, y,i,j):
         super().__init__(x, y)
+        self.row = i
+        self.col = j
         self.color = ""
     def set_color(self, color):
         self.color = color
+    def __str__(self):
+        return f"({self.row},{self.col}) "
+
+    def click(self):
+        if self.val!=2:
+            self.val+=1
+        else:
+            self.val = 0
 
     def display(self):
         if self.val == 0:
@@ -18,7 +28,6 @@ class SquareInner(Square):
             self.pic = pygame.transform.scale(pygame.image.load("Pictures/x_pic.png"), (self.width, self.height))
 
         if self.val == 2:
-            self.pic = pygame.transform.scale(self.pic, (self.width, self.height))
             self.pic = pygame.transform.scale(pygame.image.load("Pictures/Crown.png"), (self.width, self.height))
 
 

@@ -14,6 +14,13 @@ class RedCross(Square):
 
         if self.val == 1:
             self.pic = pygame.transform.scale(pygame.image.load("Pictures/red_cross.png"), (self.width, self.height))
+        screen.blit(self.pic, (self.x, self.y))
 
+    def turnOn(self):
+        self.val = 1
+        screen.blit(self.pic, (self.x, self.y))
+
+    def turnOff(self):
+        self.val = 0
         screen.blit(self.pic, (self.x, self.y))
 
