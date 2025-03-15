@@ -1,6 +1,6 @@
 from helpers import *
 from redCross import RedCross
-from Level1 import *
+from Level1 import level_mat,colors_queens, colors, update_colors
 
 def main():
     pygame.init()
@@ -13,9 +13,9 @@ def main():
 
 
 
-    colors = {"purple":0,"orange":0,"blue":0,"green":0,"lime":0,"grey":0,"red":0}
     colors_flag = False
     no_error_flag = True
+    update_colors(colors, level_mat)
 
 
     pygame.font.init()
@@ -50,7 +50,7 @@ def main():
                 # Get the position (x,y) of the mouse press
                 pos = event.pos
                 # Check legal index - show red alerts on screen if a position is Illegal
-                check_event(pos, level_mat, value_matrix, redCross_mat, colors,level_row_index_alert_list,level_col_index_alert_list)
+                check_event(pos, level_mat, value_matrix, redCross_mat, colors,level_mat,colors_queens)
 
 
 
