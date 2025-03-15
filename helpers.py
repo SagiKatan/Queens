@@ -107,15 +107,13 @@ def turn_ON_row_alert(redCross_mat, row_index):
 
 def turn_ON_col_alert(redCross_mat, col_index):
     for row_idx in range(len(redCross_mat)):  # for each cell in the column
-        redCross_mat[row_idx][col_index].turnOn()  # turn on the alert of more than 1 queen in a column
+        redCross_mat[row_idx ][col_index].turnOn()  # turn on the alert of more than 1 queen in a column
 def turn_ON_color_alert(redCross_mat, index_list):
     for tuple_of_index in index_list:
-        redCross_mat[tuple_of_index[1]][tuple_of_index[0]].turnOn()
+        redCross_mat[tuple_of_index[0]][tuple_of_index[1]].turnOn()
 
 def turn_ON_frame_alert(value_matrix, redCross_matrix, i, j):
 
-    # turn on the middle cell.
-    redCross_matrix[i][j].turnOn()
 
     # turn on top right cell
     if i - 1 >= 0 and j + 1 < len(redCross_matrix):

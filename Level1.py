@@ -3,9 +3,10 @@ from squareInner import InnerSquare
 from helpers import *
 
 
-level_mat = [[InnerSquare(SQUARE_POS_X + i * SQUARE_WIDTH, SQUARE_POS_Y + j * SQUARE_HEIGHT,i,j) for i in range(7)] for j in
+# level_mat = [[InnerSquare(SQUARE_POS_X + i * SQUARE_WIDTH, SQUARE_POS_Y + j * SQUARE_HEIGHT,i,j) for i in range(7)] for j in
+#              range(7)]
+level_mat = [[InnerSquare(SQUARE_POS_X + j * SQUARE_WIDTH, SQUARE_POS_Y + i * SQUARE_HEIGHT,  i, j  )for j in range(7) ]for i in
              range(7)]
-
 purple_index_list = [(0, 0), (0, 1), (0, 2), (0, 3), (0, 4), (0, 5), (0, 6), (1, 0), (2, 0), (3, 0), (4, 0), (5, 0),
                      (6, 0), (1, 1), (1, 3), (1, 6), (4, 1), (5, 1), (6, 1), (4, 2), (6, 2)]
 orange_index_list = [(1, 2), (2, 2), (2, 1), (3, 1)]

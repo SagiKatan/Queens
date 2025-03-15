@@ -8,10 +8,8 @@ def main():
     pygame.display.set_caption('Queens')
     clock = pygame.time.Clock()
     level_img = pygame.transform.scale(pygame.image.load( "Pictures/level1.png"), (LEVEL_WIDTH, LEVEL_HEIGHT))
-    redCross_mat = [[RedCross(SQUARE_POS_X + i*SQUARE_WIDTH, SQUARE_POS_Y + j*SQUARE_HEIGHT) for j in range(7)] for i in range(7)]
-    value_matrix = [[0 for _ in range(7)] for _ in range(7)]
-
-
+    redCross_mat = [[RedCross(SQUARE_POS_X + j * SQUARE_WIDTH, SQUARE_POS_Y + i * SQUARE_HEIGHT) for j in range(7)] for i in range(7)]
+    value_matrix = [[0 for j in range(7)] for i in range(7)]
 
     colors_flag = False
     no_error_flag = True
