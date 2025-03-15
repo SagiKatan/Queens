@@ -95,9 +95,9 @@ def is_frame_legal(value_matrix, redCross_matrix, i, j):
 
     return count == 0
 def turn_OFF_board(redCross_mat):
-    for row in redCross_mat:
-        for square in row:
-            square.turnOff()
+    for row in redCross_mat: # for each row
+        for square in row: # for each cell in the row
+            square.turnOff() # turn off the alert
 
 
 def turn_ON_row_alert(redCross_mat, row_index):
@@ -109,8 +109,14 @@ def turn_ON_col_alert(redCross_mat, col_index):
     for row_idx in range(len(redCross_mat)):  # for each cell in the column
         redCross_mat[row_idx ][col_index].turnOn()  # turn on the alert of more than 1 queen in a column
 def turn_ON_color_alert(redCross_mat, index_list):
-    for tuple_of_index in index_list:
-        redCross_mat[tuple_of_index[0]][tuple_of_index[1]].turnOn()
+    """
+
+    :param redCross_mat:
+    :param index_list: all the indexes of the color on the board, each item is a tuple (row,column) of the index.
+    :return:
+    """
+    for tuple_of_index in index_list: # for each tuple in the list
+        redCross_mat[tuple_of_index[0]][tuple_of_index[1]].turnOn() # turn on an alert on the cell
 
 def turn_ON_frame_alert(value_matrix, redCross_matrix, i, j):
 
@@ -137,22 +143,31 @@ def turn_ON_frame_alert(value_matrix, redCross_matrix, i, j):
 
 
 def check_rows(value_matrix, redCross_matrix):
-    for i in range(len(value_matrix)):
-        if not is_row_legal(value_matrix, i):
-            turn_ON_row_alert(redCross_matrix, i)
+    flag = False # a flag that says if there is an alert for at least 1 row.
+    for i in range(len(value_matrix)): # for each row in the matrix
+        if not is_row_legal(value_matrix, i): # check if the row is legal
+            turn_ON_row_alert(redCross_matrix, i) # if it's not, turn on an alert
+            flag = True # the flag says that there is a change
+    return flag # if a row turned on return True
 
 
 def check_columns(value_matrix, redCross_matrix):
-    for j in range(len(value_matrix)):
-        if not is_col_legal(value_matrix, j):
-            turn_ON_col_alert(redCross_matrix, j)
+    flag = False # a flag that says if there is an alert for at least 1 column.
+    for j in range(len(value_matrix)): # for each column in the matrix
+        if not is_col_legal(value_matrix, j): # check if the column is legal
+            turn_ON_col_alert(redCross_matrix, j) # if it's not, turn on an alert
+            flag = True  # the flag says that there is a change
+    return flag # if a column turned on return True
 
 def check_frames(value_matrix,redCross_matrix):
-    for i in range(len(value_matrix)):
-        for j in range(len(value_matrix)):
-            if value_matrix[i][j] == 1:
-                if not is_frame_legal(value_matrix,redCross_matrix,i,j):
-                    turn_ON_frame_alert(value_matrix,redCross_matrix,i,j)
+    flag = False
+    for i in range(len(value_matrix)): # for each row in the matrix
+        for j in range(len(value_matrix)): # for each column in the row
+            if value_matrix[i][j] == 1: # if there is a queen in the cell
+                if not is_frame_legal(value_matrix,redCross_matrix,i,j): # check if the queen has a legal frame
+                    turn_ON_frame_alert(value_matrix,redCross_matrix,i,j) # turn on the alert
+                    flag = True
+    return flag
 
 
 
@@ -167,14 +182,22 @@ def count_colors(level_matrix, value_matrix, colors_queens):
                 colors_queens[color]+=1
 
 def check_colors(colors_queens,colors,redCross_matrix):
+    flag = False
+    for color in colors_queens: # for each color on the board
+        if colors_queens[color]>1: # if there is more than 1 queen in the same color
+            turn_ON_color_alert(redCross_matrix,colors[color]) # turn on the alert
+            flag = True
+    return flag
+
+
+def check_all_colors_queens(colors_queens):
+    flag = True
     for color in colors_queens:
-        if colors_queens[color]>1: # need to alert
-            turn_ON_color_alert(redCross_matrix,colors[color])
+        if colors_queens[color]!= 1:
+            flag = False
+    return flag
 
-
-
-
-def check_event(pos, innerSquare_matrix, value_matrix, redCross_mat, colors,level_matrix,colors_queens  ):
+def check_event(pos, innerSquare_matrix, value_matrix ):
     for i in range(len(innerSquare_matrix)):
         for j in range(len(innerSquare_matrix)):
             square = innerSquare_matrix[i][j]
@@ -184,10 +207,4 @@ def check_event(pos, innerSquare_matrix, value_matrix, redCross_mat, colors,leve
                     value_matrix[i][j] = 1
                 else:
                     value_matrix[i][j] = 0
-                turn_OFF_board(redCross_mat)
-                zeroing_colors(colors_queens)
-                count_colors(level_matrix, value_matrix, colors_queens)
-                check_rows(value_matrix, redCross_mat)
-                check_columns(value_matrix, redCross_mat)
-                check_frames(value_matrix,redCross_mat)
-                check_colors(colors_queens, colors, redCross_mat)
+

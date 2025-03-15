@@ -12,7 +12,7 @@ def main():
     value_matrix = [[0 for j in range(7)] for i in range(7)]
 
     colors_flag = False
-    no_error_flag = True
+    error_flag = True
     update_colors(colors, level_mat)
 
 
@@ -28,12 +28,14 @@ def main():
             text_surface = debug_font.render(row_str, True, BLACK)
             screen.blit(text_surface, (x, y))
             y += debug_font.get_height()
-    def colors_dict_print(screen,colors,pos = (150,1)):
+
+    def draw_debug_dict(screen, data_dict, pos=(150, 0) ):
         x, y = pos
         title_surface = debug_font.render("colors dict", True, BLACK)
         screen.blit(title_surface, (x, y))
         y += debug_font.get_height()
-        for key, value in colors.items():
+
+        for key, value in data_dict.items():
             text_line = f"{key}: {value}"
             text_surface = debug_font.render(text_line, True, BLACK)
             screen.blit(text_surface, (x, y))
@@ -47,8 +49,17 @@ def main():
             if event.type == pygame.MOUSEBUTTONDOWN:
                 # Get the position (x,y) of the mouse press
                 pos = event.pos
-                # Check legal index - show red alerts on screen if a position is Illegal
-                check_event(pos, level_mat, value_matrix, redCross_mat, colors,level_mat,colors_queens)
+
+                check_event(pos, level_mat, value_matrix) # update the board with the new information
+
+                turn_OFF_board(redCross_mat) # turn off all the red alerts so it could recheck
+                zeroing_colors(colors_queens) # zero all the colors count per queen
+                count_colors(level_mat, value_matrix, colors_queens) # count for each color, how many queens there are for each color
+                row_flag = check_rows(value_matrix, redCross_mat) # Check if there is a one or more rows with wrong placement. If there is at least 1 row - row_flag is True
+                column_flag = check_columns(value_matrix, redCross_mat)# Check if there is a one or more columns with wrong placement. If there is at least 1 column - column_flag is True
+                frame_flag = check_frames(value_matrix, redCross_mat) # Check for each queen if there is a queen in its frame, if there is at least 1 queen with wrong frame - frame_flag is True.
+                color_flag = check_colors(colors_queens, colors, redCross_mat) # Check if there is more than 1 queen in the same color. if there is - color flag is True
+                error_flag =  row_flag or column_flag or frame_flag or color_flag
 
 
 
@@ -59,7 +70,7 @@ def main():
 
         # debug section prints
         value_matrix_print(screen, value_matrix)
-        colors_dict_print(screen, colors)
+        draw_debug_dict(screen, colors_queens)
 
         display_matrix(level_mat)
         display_matrix(redCross_mat)
