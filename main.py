@@ -8,7 +8,6 @@ def main():
     pygame.display.set_caption('Queens')
     clock = pygame.time.Clock()
     win_image = pygame.transform.scale(pygame.image.load( "Pictures/you_win.jpg"), (YOU_WIN_WIDTH, YOU_WIN_HEIGHT))
-    screen.blit(win_image, (LEVEL_POS_X, LEVEL_POS_Y))
 
     level_img = pygame.transform.scale(pygame.image.load( "Pictures/level1.png"), (LEVEL_WIDTH, LEVEL_HEIGHT))
     redCross_mat = [[RedCross(SQUARE_POS_X + j * SQUARE_WIDTH, SQUARE_POS_Y + i * SQUARE_HEIGHT) for j in range(7)] for i in range(7)]
@@ -49,13 +48,11 @@ def main():
         screen.fill(WHITE)
         screen.blit(level_img, (LEVEL_POS_X, LEVEL_POS_Y))
 
-
-
         display_matrix(level_mat)
         display_matrix(redCross_mat)
         if all_queens_flag and not error_flag:
             update_victory_image(value_matrix, level_mat)
-            screen.blit(win_image, (LEVEL_POS_X, LEVEL_POS_Y))
+            screen.blit(win_image, (YOU_WIN_POS_X, YOU_WIN_POS_Y))
 
         pygame.display.flip()
     pygame.quit()
