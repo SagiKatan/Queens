@@ -197,6 +197,11 @@ def check_all_colors_queens(colors_queens):
             flag = False
     return flag
 
+def update_victory_image(value_matrix,innerSquare_matrix):
+    for i in range(len(innerSquare_matrix)):
+        for j in range(len(innerSquare_matrix)):
+            if value_matrix[i][j] == 1:
+                innerSquare_matrix[i][j].set_win_crown()
 def check_event(pos, innerSquare_matrix, value_matrix ):
     for i in range(len(innerSquare_matrix)):
         for j in range(len(innerSquare_matrix)):

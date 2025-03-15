@@ -24,6 +24,7 @@ class InnerSquare(Square):
             self.val = 0
 
     def display(self):
+
         if self.val == 0:
             self.pic = pygame.transform.scale(pygame.image.load("Pictures/BLANK_PIC.png"), (self.width, self.height))
 
@@ -33,6 +34,8 @@ class InnerSquare(Square):
         if self.val == 2:
             self.pic = pygame.transform.scale(pygame.image.load("Pictures/Crown.png"), (self.width, self.height))
 
-
+        screen.blit(self.pic, (self.x, self.y))
+    def set_win_crown(self):
+        self.pic = pygame.transform.scale(pygame.image.load("Pictures/win_crown.png"), (self.width, self.height))
         screen.blit(self.pic, (self.x, self.y))
 
