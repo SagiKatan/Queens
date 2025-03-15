@@ -12,17 +12,18 @@ def main():
     level_img = pygame.transform.scale(pygame.image.load( "Pictures/level1.png"), (LEVEL_WIDTH, LEVEL_HEIGHT))
     redCross_mat = [[RedCross(SQUARE_POS_X + j * SQUARE_WIDTH, SQUARE_POS_Y + i * SQUARE_HEIGHT) for j in range(7)] for i in range(7)]
     value_matrix = [[0 for j in range(7)] for i in range(7)]
-
+    font = pygame.font.SysFont(None, 48)
     all_queens_flag = False # a flag for knowing if player finished place all queens.
     error_flag = False # a flag for knowing if there is an alert on board
     # game will be finished if all_queens_flag is True and error_flag is False
     update_colors(colors, level_mat)
 
-
-
+    start_ticks = pygame.time.get_ticks()
+    victory_time = None
 
     running = True
     while running:
+        dt = clock.tick(60)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
@@ -43,18 +44,33 @@ def main():
         error_flag =  row_flag or column_flag or frame_flag or color_flag
         all_queens_flag = check_all_colors_queens(colors_queens)
 
-
+        current_ticks = pygame.time.get_ticks()
 
         screen.fill(WHITE)
         screen.blit(level_img, (LEVEL_POS_X, LEVEL_POS_Y))
 
+
+
+
         display_matrix(level_mat)
         display_matrix(redCross_mat)
         if all_queens_flag and not error_flag:
+            if victory_time is None:
+                victory_time = (pygame.time.get_ticks() - start_ticks) / 1000
+
             update_victory_image(value_matrix, level_mat)
             screen.blit(win_image, (YOU_WIN_POS_X, YOU_WIN_POS_Y))
+            win_text = font.render(f"Time: {victory_time:.2f}", True, BLACK)
+            screen.blit(win_text, (TIME_POS_X, TIME_POS_Y))
+        else:
+            current_time = (pygame.time.get_ticks() - start_ticks) / 1000
+            time_text = font.render(f"Time: {current_time:.2f}", True, BLACK)
+            screen.blit(time_text, (TIME_POS_X, TIME_POS_Y))
 
         pygame.display.flip()
+
+
+
     pygame.quit()
     quit()
 
