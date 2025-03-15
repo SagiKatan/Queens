@@ -15,9 +15,11 @@ lime_index_list = [(5, 4), (5, 5), (6, 5), (6, 6)]
 grey_index_list = [(3, 2), (3, 3), (4, 3), (4, 4)]
 red_index_list = [(5, 2), (5, 3), (6, 3), (6, 4)]
 
+
 colors = {"purple": purple_index_list, "orange": orange_index_list, "blue": blue_index_list,
           "green": green_index_list, "lime": lime_index_list, "grey": grey_index_list, "red": red_index_list}
-
+level_row_index_alert_list = []
+level_col_index_alert_list = []
 def update_colors(colors,level_mat):
     for key in colors:
             for item in colors[key]:

@@ -3,10 +3,10 @@ from helpers import screen
 from constants import SQUARE_WIDTH, SQUARE_HEIGHT
 from square import Square
 
+
 class RedCross(Square):
     def __init__(self, x, y):
-        super().__init__(x,y)
-
+        super().__init__(x, y)
 
     def display(self):
         if self.val == 0:
@@ -21,6 +21,11 @@ class RedCross(Square):
         screen.blit(self.pic, (self.x, self.y))
 
     def turnOff(self):
+
         self.val = 0
         screen.blit(self.pic, (self.x, self.y))
+    def get_value(self):
+        return self.val
 
+    def __str__(self):
+        return f"pts: {self.points} val: {self.val};"
