@@ -2,8 +2,9 @@ import pygame
 from helpers import screen
 from constants import SQUARE_WIDTH, SQUARE_HEIGHT
 
+
 class Square:
-    def __init__(self, x, y,i,j):
+    def __init__(self, x, y, i, j):
         self.x = x
         self.y = y
         self.row = i
@@ -13,7 +14,7 @@ class Square:
         self.color = ""
         self.width = SQUARE_WIDTH
         self.height = SQUARE_HEIGHT
-        self.pic = pygame.transform.scale(pygame.image.load( "Pictures/BLANK_PIC.png"), (self.width, self.height))
+        self.pic = pygame.transform.scale(pygame.image.load("Pictures/BLANK_PIC.png"), (self.width, self.height))
         self.error_pic = pygame.transform.scale(pygame.image.load("Pictures/BLANK_PIC.png"), (self.width, self.height))
 
     def set_color(self, color):
