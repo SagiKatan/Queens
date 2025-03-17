@@ -26,11 +26,12 @@ class InnerSquare(Square):
             self.val = 0
     def turnOn(self):
         self.error_val = 1
-        screen.blit(self.pic, (self.x, self.y))
+
+
 
     def turnOff(self):
         self.error_val = 0
-        screen.blit(self.pic, (self.x, self.y))
+
 
     def display(self):
 
@@ -51,6 +52,7 @@ class InnerSquare(Square):
                                                     (self.width, self.height))
 
         screen.blit(self.pic, (self.x, self.y))
+        screen.blit(self.error_pic, (self.x, self.y))
     def set_win_crown(self):
         self.pic = pygame.transform.scale(pygame.image.load("Pictures/win_crown.png"), (self.width, self.height))
         screen.blit(self.pic, (self.x, self.y))
