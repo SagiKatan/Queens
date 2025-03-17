@@ -9,6 +9,8 @@ class InnerSquare(Square):
         self.row = i
         self.col = j
         self.color = ""
+        self.error_pic =  pygame.transform.scale(pygame.image.load("Pictures/BLANK_PIC.png"), (self.width, self.height))
+        self.error_val = 0
     def set_color(self, color):
         self.color = color
 
@@ -22,6 +24,13 @@ class InnerSquare(Square):
             self.val+=1
         else:
             self.val = 0
+    def turnOn(self):
+        self.error_val = 1
+        screen.blit(self.pic, (self.x, self.y))
+
+    def turnOff(self):
+        self.error_val = 0
+        screen.blit(self.pic, (self.x, self.y))
 
     def display(self):
 
@@ -33,6 +42,13 @@ class InnerSquare(Square):
 
         if self.val == 2:
             self.pic = pygame.transform.scale(pygame.image.load("Pictures/Crown.png"), (self.width, self.height))
+
+        if self.error_val == 0:
+            self.error_pic = pygame.transform.scale(pygame.image.load("Pictures/BLANK_PIC.png"),
+                                                    (self.width, self.height))
+        if self.error_val == 1:
+            self.error_pic = pygame.transform.scale(pygame.image.load("Pictures/red_cross.png"),
+                                                    (self.width, self.height))
 
         screen.blit(self.pic, (self.x, self.y))
     def set_win_crown(self):
