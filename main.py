@@ -1,5 +1,4 @@
 from helpers import *
-from redCross import RedCross
 from Level1 import level_mat,colors_queens, colors, update_colors, level_img
 
 def main():

@@ -1,10 +1,12 @@
 
-from squareInner import InnerSquare
+# from squareInner import InnerSquare
+from square import Square
+
 from helpers import *
 
 level_img = pygame.transform.scale(pygame.image.load("Pictures/level1.png"), (LEVEL_WIDTH, LEVEL_HEIGHT))
 
-level_mat = [[InnerSquare(SQUARE_POS_X + j * SQUARE_WIDTH, SQUARE_POS_Y + i * SQUARE_HEIGHT,  i, j  )for j in range(7) ]for i in
+level_mat = [[Square(SQUARE_POS_X + j * SQUARE_WIDTH, SQUARE_POS_Y + i * SQUARE_HEIGHT,  i, j  )for j in range(7) ]for i in
              range(7)]
 purple_index_list = [(0, 0), (0, 1), (0, 2), (0, 3), (0, 4), (0, 5), (0, 6), (1, 0), (2, 0), (3, 0), (4, 0), (5, 0),
                      (6, 0), (1, 1), (1, 3), (1, 6), (4, 1), (5, 1), (6, 1), (4, 2), (6, 2)]
