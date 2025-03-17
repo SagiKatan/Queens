@@ -1,21 +1,18 @@
 from helpers import *
 from redCross import RedCross
-from Level1 import level_mat,colors_queens, colors, update_colors
+from Level1 import level_mat,colors_queens, colors, update_colors, level_img
 
 def main():
     pygame.init()
     # define the screen
-    pygame.display.set_caption('Queens')
+    pygame.display.set_caption('Queens') # define screen title
     clock = pygame.time.Clock()
-    win_image = pygame.transform.scale(pygame.image.load( "Pictures/you_win.jpg"), (YOU_WIN_WIDTH, YOU_WIN_HEIGHT))
 
-    level_img = pygame.transform.scale(pygame.image.load( "Pictures/level1.png"), (LEVEL_WIDTH, LEVEL_HEIGHT))
     redCross_mat = [[RedCross(SQUARE_POS_X + j * SQUARE_WIDTH, SQUARE_POS_Y + i * SQUARE_HEIGHT) for j in range(7)] for i in range(7)]
     value_matrix = [[0 for j in range(7)] for i in range(7)]
     font = pygame.font.SysFont(None, 48)
     all_queens_flag = False # a flag for knowing if player finished place all queens.
     error_flag = False # a flag for knowing if there is an alert on board
-    # game will be finished if all_queens_flag is True and error_flag is False
     update_colors(colors, level_mat)
 
     start_ticks = pygame.time.get_ticks()
@@ -44,17 +41,18 @@ def main():
         error_flag =  row_flag or column_flag or frame_flag or color_flag
         all_queens_flag = check_all_colors_queens(colors_queens)
 
-        current_ticks = pygame.time.get_ticks()
 
         screen.fill(WHITE)
         screen.blit(level_img, (LEVEL_POS_X, LEVEL_POS_Y))
+        screen.blit(queens_logo_img, (QUEENS_LOGO_POS_X, QUEENS_LOGO_POS_Y))
 
 
 
 
         display_matrix(level_mat)
         display_matrix(redCross_mat)
-        if all_queens_flag and not error_flag:
+        if all_queens_flag and not error_flag:    # game will be finished if all_queens_flag is True and error_flag is False
+
             if victory_time is None:
                 victory_time = (pygame.time.get_ticks() - start_ticks) / 1000
 

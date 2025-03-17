@@ -2,7 +2,7 @@
 from squareInner import InnerSquare
 from helpers import *
 
-
+level_img = pygame.transform.scale(pygame.image.load("Pictures/level1.png"), (LEVEL_WIDTH, LEVEL_HEIGHT))
 
 level_mat = [[InnerSquare(SQUARE_POS_X + j * SQUARE_WIDTH, SQUARE_POS_Y + i * SQUARE_HEIGHT,  i, j  )for j in range(7) ]for i in
              range(7)]
