@@ -55,14 +55,18 @@ def main():
 
             if victory_time is None:
                 victory_time = (pygame.time.get_ticks() - start_ticks) / 1000
+            minutes = int(victory_time) // 60
+            seconds = int(victory_time) % 60
 
             update_victory_image(value_matrix, level_mat)
             screen.blit(win_image, (YOU_WIN_POS_X, YOU_WIN_POS_Y))
-            win_text = font.render(f"Time: {victory_time:.2f}", True, BLACK)
+            win_text = font.render(f"Time: {minutes:02d}:{seconds:02d}", True, BLACK)
             screen.blit(win_text, (TIME_POS_X, TIME_POS_Y))
         else:
             current_time = (pygame.time.get_ticks() - start_ticks) / 1000
-            time_text = font.render(f"Time: {current_time:.2f}", True, BLACK)
+            minutes = int(current_time) // 60
+            seconds = int(current_time) % 60
+            time_text = font.render(f"Time: {minutes:02d}:{seconds:02d}", True, BLACK)
             screen.blit(time_text, (TIME_POS_X, TIME_POS_Y))
 
         pygame.display.flip()
